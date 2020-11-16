@@ -1,9 +1,96 @@
-/* add css module styles here (optional) */
+.delimiter {
+  border-top: 0.1px solid #bababa;
+  height: 0.1rem;
+  margin-top: 0.1rem;
+}
 
-.test {
-  margin: 2em;
-  padding: 0.5em;
-  border: 2px solid #000;
-  font-size: 2em;
+@keyframes showCopyAlert {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+.html-viewer {
+  border: 0.1px solid #bababa;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: grid;
+  grid-template-rows: auto;
+  gap: 1rem;
+}
+.html-viewer .html-viewer-display > *:first-child {
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+.html-viewer .html-viewer-toggler-container {
+  display: flex;
+  flex-direction: row-reverse;
+  flex: 1;
+}
+.html-viewer .html-viewer-toggler-container .html-viewer-copy-button {
+  border: none;
+  outline: none;
+  background: #efefef;
+  margin: 0.2rem;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+.html-viewer .html-viewer-toggler-container .html-viewer-copy-button:hover {
+  background: #007bff;
+  color: white;
+}
+.html-viewer .html-viewer-toggler-container .html-viewer-copy-alert {
+  margin: 0.2rem;
+  padding: 0 0.5rem;
+  color: #fff;
+  background-color: #00b94b;
+  border-radius: 0.25rem;
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+}
+.html-viewer .html-viewer-toggler-container .html-viewer-copy-alert.visible {
+  animation-name: showCopyAlert;
+  animation-direction: alternate;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-iteration-count: 2;
+  animation-timing-function: linear;
+}
+.html-viewer .html-viewer-toggler-container .html-viewer-toggler {
+  border-radius: 0.25rem;
+  display: grid;
+  grid-template-columns: minmax(5rem, auto) minmax(5rem, auto) minmax(5rem, auto) minmax(3rem, auto);
+  border: 0.1px solid #bababa;
   text-align: center;
 }
+.html-viewer .html-viewer-toggler-container .html-viewer-toggler label {
+  border-radius: 0.25rem;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0.2rem;
+  padding: 0.2rem 0.5rem;
+  text-align: center;
+}
+.html-viewer .html-viewer-toggler-container .html-viewer-toggler label:hover,
+.html-viewer .html-viewer-toggler-container .html-viewer-toggler label checkbox label:hover {
+  color: #000;
+  background: #efefef;
+}
+.html-viewer .html-viewer-toggler-container .html-viewer-toggler input:checked + label {
+  background: #007bff;
+  color: white;
+}
+.html-viewer .html-viewer-toggler-container .html-viewer-toggler input {
+  display: none;
+}
+.html-viewer .html-viewer-toggler-container .html-viewer-toggler.vertical {
+  flex-flow: column wrap;
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -1,10 +1,17 @@
 {
-  "name": "rhcv",
+  "name": "react-html-code-viewer",
   "version": "1.0.0",
-  "description": "Made with create-react-library",
+  "description": "A html code viewer that can switch from raw to rendered code and copy to the clipboard",
   "author": "vivienld",
   "license": "MIT",
-  "repository": "vivienld/rhcv",
+  "repository": "vivienld/react-html-code-viewer",
+  "keywords": [
+    "react",
+    "html",
+    "code",
+    "preview",
+    "clipboard"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
@@ -24,10 +31,9 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "17.0.1"
   },
   "devDependencies": {
-    "microbundle-crl": "^0.13.10",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
@@ -41,13 +47,19 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-standard": "^4.0.1",
     "gh-pages": "^2.2.0",
+    "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
     "react-scripts": "^3.4.1"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "jsx-to-string": "^1.4.0",
+    "npm-install-peers": "^1.2.1",
+    "react-syntax-highlighter": "^15.3.0"
+  }
 }

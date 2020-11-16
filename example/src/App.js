@@ -1,10 +1,12 @@
 import React from 'react'
 
-import { ExampleComponent } from 'rhcv'
+import HtmlCodeViewer from 'rhcv'
 import 'rhcv/dist/index.css'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return <HtmlCodeViewer>
+    <div>foooo</div>
+    </HtmlCodeViewer>
 }
 
 export default App
