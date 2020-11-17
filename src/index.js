@@ -121,7 +121,7 @@ class HtmlCodeViewer extends React.Component {
 
     this.state = {
       content: props.children,
-      htmlLabelStyle: style.label,
+      htmlLabelStyle: style.labelActive,
       rawLabelStyle: style.label,
       copyLabelStyle: style.copyLabel,
     }
