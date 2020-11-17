@@ -11,6 +11,8 @@ class HtmlCodeViewer extends React.Component {
   constructor(props) {
     super(props)
 
+    const id = (props.id) ? props.id : v4();
+
     this.id = v4();
 
     if (props.title) {
@@ -80,15 +82,15 @@ class HtmlCodeViewer extends React.Component {
           {this.title}
 
           <div className={style.toggler}>
-            <input type="radio" name={this.id + "contentRadio"} id={this.id + "-htmlRadio"} defaultChecked />
+            <input type="radio" name={"contentRadio-" + this.id} id={"htmlRadio-" + this.id} defaultChecked />
 
-            <label htmlFor={this.id + "-htmlRadio"} className={style.label}
+            <label htmlFor={"htmlRadio-" + this.id} className={style.label}
               onClick={this.displayHtml}
             >
               html</label>
-            <input type="radio" name={this.id + "contentRadio"} id={this.id + "-rawRadio"} />
+            <input type="radio" name={"contentRadio-" + this.id} id={"rawRadio-" + this.id} />
 
-            <label htmlFor={this.id + "-rawRadio"} className={style.label}
+            <label htmlFor={"rawRadio-" + this.id} className={style.label}
               onClick={this.displayRaw}
             >
               code</label>
