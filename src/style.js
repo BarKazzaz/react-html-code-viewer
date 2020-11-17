@@ -21,6 +21,7 @@ const style = {
         flexDirection: "row",
         border: "0.1px solid #bababa",
         padding: ".5rem",
+        borderRadius: " 0.25rem",
     },
     title: {
         fontSize: "1.6rem"
