@@ -48,6 +48,8 @@
 @media (max-width: 540px) {
   .htmlViewer .togglerContainer {
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .htmlViewer .title {
     text-align: center;
@@ -62,7 +64,8 @@
 .htmlViewer .toggler {
   border-radius: 0.25rem;
   display: flex;
-  justify-content: center;
+  width: fit-content;
+  justify-content: flex-end;
   align-items: center;
 }
 
