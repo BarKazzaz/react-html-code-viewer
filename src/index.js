@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
-import jsxToString from 'jsx-to-string'
+import reactElementToJSXString from 'react-element-to-jsx-string'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { agate } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 import { v4 } from 'uuid'
@@ -25,7 +25,7 @@ class HtmlCodeViewer extends React.Component {
       this.title = <div className={style.title}>{this.props.title}</div>
     }
 
-    this.str = jsxToString(props.children)
+    this.str = reactElementToJSXString(props.children)
 
     if (props.language === 'html') {
       this.str = this.str.replace(/className/g, 'class')
