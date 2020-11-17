@@ -3,15 +3,17 @@ import React from 'react'
 import jsxToString from 'jsx-to-string'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { agate } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
-import style from './style'
+
+import style from './styles.module.css'
 
 class HtmlCodeViewer extends React.Component {
   constructor(props) {
     super(props)
 
     if (props.title) {
-      this.title = <div style={style.title}>{this.props.title}</div>
+      this.title = <div className={style.title}>{this.props.title}</div>
     }
+
     this.str = jsxToString(props.children)
 
     if (props.language === 'html') {
@@ -57,82 +59,45 @@ class HtmlCodeViewer extends React.Component {
 
   copyToClipBoard(e) {
     e.persist()
-    navigator.clipboard.writeText(this.str).then(() => {
-      this.setLabelStyle('copyLabelStyle', 'copyLabelActive')
-      setTimeout(() => {
-        this.setLabelStyle('copyLabelStyle', 'copyLabelHover')
-      }, 150)
-    })
-  }
+    const target = e.currentTarget;
 
-  setLabelStyle(labelName, styleName, force) {
-    if (force) {
-      this.state[labelName] = style[styleName];
-      this.setState(this.state);
-    }
-    else {
-      if (this.state[labelName] !== style.labelActive) {
-        this.state[labelName] = style[styleName];
-        this.setState(this.state);
-      }
-    }
+    target.innerText = "copied"
+
+    navigator.clipboard.writeText(this.str).then(() => {
+      setTimeout(() => {
+        target.innerText = "copy"
+      }, 500)
+    })
   }
 
   render() {
     return (
-      <div style={style.htmlViewer} className='.htmlViewer'>
-        <div style={style.togglerContainer} className='.togglerContainer'>
+      <div className={style.htmlViewer}>
+        <div className={style.togglerContainer}>
           {this.title}
-          <div style={style.toggler} className='.toggler'>
-            <div id="htmlLabel" style={this.state.htmlLabelStyle}
-              onClick={
-                () => {
-                  this.setLabelStyle('htmlLabelStyle', 'labelActive')
-                  this.setLabelStyle('rawLabelStyle', 'label', true);
-                  this.displayHtml();
-                }
-              }
-              onMouseEnter={
-                () => this.setLabelStyle('htmlLabelStyle', 'labelHover')
-              }
-              onMouseLeave={
-                () => this.setLabelStyle('htmlLabelStyle', 'label')
-              }
-            >html</div>
 
-            <div id="rawLabel" style={this.state.rawLabelStyle}
-              onClick={
-                () => {
-                  this.setLabelStyle('rawLabelStyle', 'labelActive')
-                  this.setLabelStyle('htmlLabelStyle', 'label', true)
+          <div className={style.toggler}>
+            <input type="radio" name="contentRadio" id="htmlRadio" defaultChecked />
 
-                  this.displayRaw();
-                }
-              }
-              onMouseEnter={
-                () => this.setLabelStyle('rawLabelStyle', 'labelHover')
-              }
-              onMouseLeave={
-                () => {
-                  this.setLabelStyle('rawLabelStyle', 'label')
-                }
-              }
-            >code</div>
-            <div style={this.state.copyLabelStyle}
+            <label htmlFor="htmlRadio" id="htmlLabel" className={style.label}
+              onClick={this.displayHtml}
+            >
+              html</label>
+            <input type="radio" name="contentRadio" id="rawRadio" />
 
+            <label htmlFor="rawRadio" id="rawLabel" className={style.label}
+              onClick={this.displayRaw}
+            >
+              code</label>
+
+            <div className={style.label}
               onClick={this.copyToClipBoard}
-
-              onMouseEnter={
-                () => this.setLabelStyle('copyLabelStyle', 'copyLabelHover')
-              }
-              onMouseLeave={
-                () => this.setLabelStyle('copyLabelStyle', 'copyLabel')
-              }>copy</div>
+            >copy</div>
           </div>
         </div>
-        <div className='.delimiter' style={style.delimiter} />
+        <div className={style.delimiter} />
 
-        <div className='.content' style={style.content}>{this.state.content}</div>
+        <div className={style.content}>{this.state.content}</div>
       </div>
     )
   }

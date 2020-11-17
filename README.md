@@ -19,6 +19,9 @@ import React, { Component } from 'react'
 
 import HtmlCodeViewer from 'react-html-code-viewer'
 
+//import style in you project if using nextjs
+import 'react-html-code-viewer/dist/index.css'
+
 class Example extends Component {
   render() {
     return <HtmlCodeViewer title="Example title">
@@ -27,6 +30,8 @@ class Example extends Component {
   }
 }
 ```
+
+
 ## Example
 
 [here](https://vivienld.github.io/react-html-code-viewer/)
