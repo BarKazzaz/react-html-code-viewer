@@ -3,12 +3,15 @@ import React from 'react'
 import jsxToString from 'jsx-to-string'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { agate } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+import { v4 } from 'uuid';
 
 import style from './styles.module.css'
 
 class HtmlCodeViewer extends React.Component {
   constructor(props) {
     super(props)
+
+    this.id = v4();
 
     if (props.title) {
       this.title = <div className={style.title}>{this.props.title}</div>
@@ -77,15 +80,15 @@ class HtmlCodeViewer extends React.Component {
           {this.title}
 
           <div className={style.toggler}>
-            <input type="radio" name="contentRadio" id="htmlRadio" defaultChecked />
+            <input type="radio" name={this.id + "contentRadio"} id={this.id + "-htmlRadio"} defaultChecked />
 
-            <label htmlFor="htmlRadio" id="htmlLabel" className={style.label}
+            <label htmlFor={this.id + "-htmlRadio"} className={style.label}
               onClick={this.displayHtml}
             >
               html</label>
-            <input type="radio" name="contentRadio" id="rawRadio" />
+            <input type="radio" name={this.id + "contentRadio"} id={this.id + "-rawRadio"} />
 
-            <label htmlFor="rawRadio" id="rawLabel" className={style.label}
+            <label htmlFor={this.id + "-rawRadio"} className={style.label}
               onClick={this.displayRaw}
             >
               code</label>
