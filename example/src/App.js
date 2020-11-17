@@ -5,8 +5,8 @@ import 'rhcv/dist/index.css'
 
 const App = () => {
   return <HtmlCodeViewer>
-    <div>foooo</div>
-    </HtmlCodeViewer>
+    <div>This is an example of how react-html-code-viewer works.</div>
+  </HtmlCodeViewer>
 }
 
 export default App

@@ -28,6 +28,10 @@ class Example extends Component {
 }
 ```
 
+## Example
+
+[here](https://vivienld.github.io/react-html-code-viewer/)
+
 ## License
 
 MIT © [vivienld](https://github.com/vivienld)
