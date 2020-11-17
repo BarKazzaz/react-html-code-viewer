@@ -101,7 +101,7 @@ class HtmlCodeViewer extends React.Component {
             >
               code</label>
 
-            <div className={style.label}
+            <div className={style.label + ' ' + style.copyLabel}
               onClick={this.copyToClipBoard}
             >copy</div>
           </div>
