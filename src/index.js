@@ -3,6 +3,8 @@ import jsxToString from 'jsx-to-string'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { agate } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
+import styles from './styles.module.css'
+
 class HtmlCodeViewer extends React.Component {
   constructor(props) {
     super(props)
@@ -31,6 +33,7 @@ class HtmlCodeViewer extends React.Component {
 
     this.display = this.display.bind(this)
     this.handleChecked = this.handleChecked.bind(this)
+    this.copyToClipBoard = this.copyToClipBoard.bind(this)
   }
 
   display(what) {
@@ -46,20 +49,22 @@ class HtmlCodeViewer extends React.Component {
   copyToClipBoard(e) {
     e.persist()
     navigator.clipboard.writeText(this.str).then(() => {
-      const target = e.target.parentNode.lastChild
-      target.classList.add('visible')
+      const target = document.getElementById('copyLabel')
+      target.style.backgroundColor = 'rgb(31, 189, 0)'
+      target.style.color = '#fff'
 
       setTimeout(() => {
-        target.classList.remove('visible')
-      }, 1000)
+        target.style = null;
+      }, 500)
+
     })
   }
 
   render() {
     return (
-      <div className={'html-viewer ' + this.props.className}>
-        <div className='html-viewer-toggler-container'>
-          <div className='html-viewer-toggler'>
+      <div className={styles.htmlViewer + ' ' + this.props.className}>
+        <div className={styles.togglerContainer}>
+          <div className={styles.toggler}>
             <input
               type='radio'
               name={this.props.id + 'codeToggle'}
@@ -79,18 +84,18 @@ class HtmlCodeViewer extends React.Component {
 
             <label htmlFor={this.props.id + '-raw'}>code</label>
             <div
-              className='html-viewer-copy-button'
+              className={styles.copyLabel}
               onClick={this.copyToClipBoard}
+              id='copyLabel'
             >
               copy
           </div>
-            <div className='html-viewer-copy-alert'>✓</div>
           </div>
-        </div>
-        <div className='delimiter' />
+        </div >
+        <div className={styles.delimiter} />
 
-        <div className='html-viewer-display'>{this.state.content}</div>
-      </div>
+        <div className={styles.content}>{this.state.content}</div>
+      </div >
     )
   }
 }
