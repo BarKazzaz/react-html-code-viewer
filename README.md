@@ -21,13 +21,12 @@ import HtmlCodeViewer from 'react-html-code-viewer'
 
 class Example extends Component {
   render() {
-    return <HtmlCodeViewer>
+    return <HtmlCodeViewer title="Example title">
     -- your html code here --
     </HtmlCodeViewer>
   }
 }
 ```
-
 ## Example
 
 [here](https://vivienld.github.io/react-html-code-viewer/)

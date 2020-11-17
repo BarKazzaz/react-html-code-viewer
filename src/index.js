@@ -3,104 +3,15 @@ import React from 'react'
 import jsxToString from 'jsx-to-string'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { agate } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
-
-const style = {
-  delimiter: {
-    borderTop: "0.1px solid #bababa",
-    height: "0.1rem",
-    marginTop: "0.1rem",
-  },
-  htmlViewer: {
-    border: "0.1px solid #bababa",
-    borderRadius: "0.5rem",
-    padding: "1rem",
-    display: "grid",
-    gridTemplateRows: "auto",
-    gap: "1rem",
-  },
-  content: {
-    borderRadius: "0.5rem",
-    padding: "0.5rem",
-  },
-  togglerContainer: {
-    display: "flex",
-    flexDirection: "row-reverse",
-    flex: 1,
-  },
-  copyLabel: {
-    border: "none",
-    outline: "none",
-    margin: "0.2rem",
-    padding: "0.2rem 0.5rem",
-    cursor: "pointer",
-    borderRadius: "0.25rem",
-  },
-  copyLabelHover: {
-    border: "none",
-    outline: "none",
-    margin: "0.2rem",
-    padding: "0.2rem 0.5rem",
-    cursor: "pointer",
-    borderRadius: "0.25rem",
-    color: "#007bff",
-  },
-  copyLabelActive: {
-    border: "none",
-    outline: "none",
-    margin: "0.2rem",
-    padding: "0.2rem 0.5rem",
-    cursor: "pointer",
-    borderRadius: "0.25rem",
-    backgroundColor: "#007bff",
-    color: '#fff'
-  },
-  toggler: {
-    borderRadius: " 0.25rem",
-    display: "grid",
-    gridTemplateColumns: "minmax(5rem, auto) minmax(5rem, auto) minmax(3rem, auto)",
-    border: "0.1px solid #bababa",
-    textAlign: "center",
-  },
-  label: {
-    borderRadius: "0.25rem",
-    cursor: "pointer",
-    display: "inline-block",
-    margin: "0.2rem",
-    padding: "0.2rem 0.5rem",
-    textAlign: "center",
-  },
-  labelHover: {
-    borderRadius: "0.25rem",
-    cursor: "pointer",
-    display: "inline-block",
-    margin: "0.2rem",
-    padding: "0.2rem 0.5rem",
-    textAlign: "center",
-    color: "#000",
-    backgroundColor: "#efefef",
-  },
-  labelActive: {
-    borderRadius: "0.25rem",
-    cursor: "pointer",
-    display: "inline-block",
-    margin: "0.2rem",
-    padding: "0.2rem 0.5rem",
-    textAlign: "center",
-    background: "#007bff",
-    color: "white",
-  },
-  togglerInput: {
-    display: "none",
-  },
-  togglerVertical: {
-    flexFlow: "column wrap",
-  }
-}
+import style from './style'
 
 class HtmlCodeViewer extends React.Component {
   constructor(props) {
     super(props)
 
+    if (props.title) {
+      this.title = <div style={style.title}>{this.props.title}</div>
+    }
     this.str = jsxToString(props.children)
 
     if (props.language === 'html') {
@@ -149,7 +60,7 @@ class HtmlCodeViewer extends React.Component {
     navigator.clipboard.writeText(this.str).then(() => {
       this.setLabelStyle('copyLabelStyle', 'copyLabelActive')
       setTimeout(() => {
-        this.setLabelStyle('copyLabelStyle', 'copyLabel')
+        this.setLabelStyle('copyLabelStyle', 'copyLabelHover')
       }, 150)
     })
   }
@@ -171,8 +82,8 @@ class HtmlCodeViewer extends React.Component {
     return (
       <div style={style.htmlViewer} className='.htmlViewer'>
         <div style={style.togglerContainer} className='.togglerContainer'>
+          {this.title}
           <div style={style.toggler} className='.toggler'>
-
             <div id="htmlLabel" style={this.state.htmlLabelStyle}
               onClick={
                 () => {
@@ -222,7 +133,7 @@ class HtmlCodeViewer extends React.Component {
         <div className='.delimiter' style={style.delimiter} />
 
         <div className='.content' style={style.content}>{this.state.content}</div>
-      </div >
+      </div>
     )
   }
 }
