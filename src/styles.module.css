@@ -43,6 +43,7 @@
   border: 0.1px solid #bababa;
   padding: 0.5rem;
   border-radius: 0.25rem;
+  justify-content: flex-end;
 }
 
 @media (max-width: 540px) {
@@ -65,8 +66,6 @@
   border-radius: 0.25rem;
   display: flex;
   width: fit-content;
-  justify-content: flex-end;
-  align-items: center;
 }
 
 .htmlViewer .label {
