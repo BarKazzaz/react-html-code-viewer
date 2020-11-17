@@ -11,6 +11,7 @@ class HtmlCodeViewer extends React.Component {
   constructor(props) {
     super(props)
 
+    this.onChange = (this.props.onChange) ? this.props.onChange : () => { }
     this.htmlIsActive = (this.props.active === "html") ? style.active : null
     this.rawIsActive = (this.props.active === "raw") ? style.active : null
 
@@ -87,13 +88,13 @@ class HtmlCodeViewer extends React.Component {
           {this.title}
 
           <div className={style.toggler}>
-            <input type="radio" name={"contentRadio-" + this.id} id={"htmlRadio-" + this.id} onChange={() => this.props.onChange('html')} defaultChecked={this.htmlIsActive === style.active} />
+            <input type="radio" name={"contentRadio-" + this.id} id={"htmlRadio-" + this.id} onChange={() => this.onChange('html')} defaultChecked={this.htmlIsActive === style.active} />
 
             <label htmlFor={"htmlRadio-" + this.id} className={style.label + " " + this.htmlIsActive}
               onClick={this.displayHtml}
             >
               html</label>
-            <input type="radio" name={"contentRadio-" + this.id} id={"rawRadio-" + this.id} onChange={() => this.props.onChange('raw')} defaultChecked={this.rawIsActive === style.active} />
+            <input type="radio" name={"contentRadio-" + this.id} id={"rawRadio-" + this.id} onChange={() => this.onChange('raw')} defaultChecked={this.rawIsActive === style.active} />
 
             <label htmlFor={"rawRadio-" + this.id} className={style.label + " " + this.rawIsActive}
               onClick={this.displayRaw}
