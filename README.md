@@ -24,13 +24,26 @@ import 'react-html-code-viewer/dist/index.css'
 
 class Example extends Component {
   render() {
-    return <HtmlCodeViewer title="Example title">
+    return <HtmlCodeViewer title={"Example title"} id={"some_id"} onChange={(active)=>{} active={"raw"}}>
     -- your html code here --
     </HtmlCodeViewer>
   }
 }
 ```
 
+The optionnal `active` prop will decide wich code will be initialy displayed
+
+If no value is given, "html" will be the default value
+
+The optionnal `title` prop will be displayed at the left of the labels
+
+The optionnal `id` prop is added as a suffix so that radios in the component don't have the same name and id. 
+
+If no `id` is given, a `v4.uuid` will be used but a conflict will occur between the server and the client in nextjs development
+
+In a map, a good practice is to use the iteration index as the `id` prop
+
+When a label is clicked, the associated radio triggers `onChange` and passes the string "html" or "raw" as argument
 
 ## Example
 
