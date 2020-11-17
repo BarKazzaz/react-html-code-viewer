@@ -43,7 +43,7 @@ class HtmlCodeViewer extends React.Component {
     </SyntaxHighlighter>
 
     this.state = {
-      content: props.children,
+      content: (props.active === "raw") ? this.raw : this.rendered,
       htmlLabelStyle: style.labelActive,
       rawLabelStyle: style.label,
       copyLabelStyle: style.copyLabel,
