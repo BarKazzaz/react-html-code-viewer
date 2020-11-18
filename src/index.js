@@ -12,7 +12,7 @@ class HtmlCodeViewer extends React.Component {
   constructor(props) {
     super(props)
 
-    console.log(this.props.style)
+    this.highlighterId = v4()
     this.onChange = (this.props.onChange) ? this.props.onChange : () => { }
     this.htmlIsActive = (this.props.active === "html") ? style.active : null
     this.rawIsActive = (this.props.active === "raw") ? style.active : null
@@ -37,6 +37,7 @@ class HtmlCodeViewer extends React.Component {
     this.rendered = props.children
 
     this.raw = <SyntaxHighlighter
+      id={this.highlighterId}
       wrapLines
       showLineNumbers
       wrapLongLines
@@ -53,6 +54,7 @@ class HtmlCodeViewer extends React.Component {
       copyLabelStyle: style.copyLabel,
     }
 
+    this.active = props.active
     this.displayHtml = this.displayHtml.bind(this)
     this.displayRaw = this.displayRaw.bind(this)
     this.handleChecked = this.handleChecked.bind(this)
@@ -61,10 +63,12 @@ class HtmlCodeViewer extends React.Component {
 
   displayRaw() {
     this.setState({ content: this.raw })
+    this.active = "raw"
   }
 
   displayHtml() {
     this.setState({ content: this.rendered })
+    this.active = "html"
   }
 
   handleChecked(e) {
@@ -84,13 +88,15 @@ class HtmlCodeViewer extends React.Component {
     })
   }
 
+
+
   render() {
     return (
-      <div className={style.htmlViewer}>
-        <div className={style.togglerContainer}>
+      <div className={[style.htmlViewer, style.overflowHidden].join(' ')} id={this.id}>
+        <div className={style.togglerContainer} id={this.id + "-togglerContainer"}>
           {this.title}
 
-          <div className={style.toggler}>
+          <div className={style.toggler} id={this.id + "-toggler"}>
             <input type="radio" name={"contentRadio-" + this.id} id={"htmlRadio-" + this.id} onChange={() => this.onChange('html')} defaultChecked={this.htmlIsActive === style.active} />
 
             <label htmlFor={"htmlRadio-" + this.id} className={style.label + " " + this.htmlIsActive}
@@ -104,13 +110,13 @@ class HtmlCodeViewer extends React.Component {
             >
               code</label>
 
-            <div className={style.label + ' ' + style.copyLabel}
+            <div className={[style.label, style.copyLabel].join(' ')}
               onClick={this.copyToClipBoard}
             >copy</div>
           </div>
         </div>
 
-        <div className={style.content}>{this.state.content}</div>
+        <div className={style.content} id={this.id + "-content"}>{this.state.content}</div>
       </div>
     )
   }

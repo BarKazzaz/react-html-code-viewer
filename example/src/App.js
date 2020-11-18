@@ -15,7 +15,7 @@ for (let style in styles) {
 }
 
 function getCodeViewer(highlighter) {
-  return <HtmlCodeViewer key={highlighter} highlighter={styles[highlighter]} active={lastActive} title="I am a title" id="unique-id" onChange={(active) => { lastActive = active; }}>
+  return <HtmlCodeViewer id="htmlViewer" key={highlighter} highlighter={styles[highlighter]} active={lastActive} title="I am a title" onChange={(active) => { lastActive = active; }}>
     <div>
       This is an example text <br />
       click on <strong>html</strong> to display rendered html<br />
@@ -30,6 +30,7 @@ const App = () => {
   const [viewer, setViewer] = useState(getCodeViewer('darcula'))
 
   return (
+
     <div className="example">
       <div className="container">
         <select className="select" onChange={(e) => { setViewer(getCodeViewer(e.currentTarget.value)) }}>

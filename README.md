@@ -45,7 +45,7 @@ If no value is given, "html" will be the default value
 
 The optionnal `title` prop will be displayed at the left of the labels
 
-The optionnal `id` prop is added as a suffix so that radios in the component don't have the same name and id. 
+The optionnal `id` prop defines the viewer id and is added as a suffix so that radios in the component don't have the same name and id
 
 If no `id` is given, a `v4.uuid` will be used but a conflict will occur between the server and the client in nextjs development
 
@@ -56,8 +56,6 @@ When a label is clicked, the associated radio triggers `onChange` and passes the
 The optionnal `highlighter` prop defines the highlighting style of the code through the react-syntax-highlighter package.
 
 `agate` is the default `highlighter` style
-
-[style demo here](https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/)
 
 [Component example here](https://vivienld.github.io/react-html-code-viewer/)
 
