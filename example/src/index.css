@@ -1,5 +1,5 @@
 html {
-  display: flex;
+  display: grid;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -17,4 +17,19 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.example {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+}
+
+.select {
+  width: 50%;
+}
+
+.container {
+  display: flex;
+  flex-flow: row-reverse wrap;
 }

@@ -28,7 +28,7 @@ class HtmlCodeViewer extends React.Component {
       this.title = <div className={style.title}>{this.props.title}</div>
     }
 
-    this.str = reactElementToJSXString(props.children)
+    this.str = reactElementToJSXString(props.children).replace(/{' '}/g, "")
 
     if (props.language === 'html') {
       this.str = this.str.replace(/className/g, 'class')
