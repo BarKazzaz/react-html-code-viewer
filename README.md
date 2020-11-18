@@ -4,7 +4,9 @@
 
 [![NPM](https://img.shields.io/npm/v/react-html-code-viewer.svg)](https://www.npmjs.com/package/react-html-code-viewer) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-react-html-code-viewer is a react component that can display rendered or raw html code, switch between the two views and copy the code to the clipboard
+react-html-code-viewer is a react component that can display rendered or raw html code, switch between the two views and copy the code to the clipboard.
+
+It relies on the amazing [react-element-to-jsx-string](https://www.npmjs.com/package/react-element-to-jsx-string) and [react-syntax-highlighter](https://www.npmjs.com/package/react-syntax-highlighter)
 
 ## Install
 
@@ -22,7 +24,6 @@ import HtmlCodeViewer from 'react-html-code-viewer'
 //import the component css in your project
 import 'rhcv/dist/index.css'
 
-//react-html-code-viewer relies on the amazing react-syntax-highlighter
 import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 const App = () => {

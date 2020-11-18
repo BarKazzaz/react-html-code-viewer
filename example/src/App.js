@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 
 import HtmlCodeViewer from 'rhcv'
 
-import 'rhcv/dist/index.css'
-
 import * as styles from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 let options = []
