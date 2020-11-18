@@ -31,3 +31,7 @@ code {
   display: flex;
   flex-flow: row-reverse wrap;
 }
+
+select {
+  padding: 0.5rem;
+}
