@@ -106,7 +106,6 @@ class HtmlCodeViewer extends React.Component {
             >copy</div>
           </div>
         </div>
-        <div className={style.delimiter} />
 
         <div className={style.content}>{this.state.content}</div>
       </div>
