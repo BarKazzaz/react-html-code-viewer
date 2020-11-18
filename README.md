@@ -15,20 +15,28 @@ npm install --save react-html-code-viewer
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
 
 import HtmlCodeViewer from 'react-html-code-viewer'
 
-//import style in you project
-import 'react-html-code-viewer/dist/index.css'
+//import the component css in your project
+import 'rhcv/dist/index.css'
 
-class Example extends Component {
-  render() {
-    return <HtmlCodeViewer title={"Example title"} id={"some_id"} onChange={(active)=>{}} active={"raw"}>
-    -- your html code here --
-    </HtmlCodeViewer>
-  }
+//react-html-code-viewer relies on the amazing react-syntax-highlighter
+import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+
+const App = () => {
+  return (
+    <div>
+      <HtmlCodeViewer highlighter={darcula} title="Example title" id="unique-id" active="raw" onChange={(active) => { console.log(active) }}>
+        <div>This is an example of how react-html-code-viewer works.</div>
+      </HtmlCodeViewer>
+    </div>
+  )
 }
+
+export default App
+
 ```
 
 The optionnal `active` prop will decide whether "html" or "raw" code will be initialy displayed
@@ -44,6 +52,10 @@ If no `id` is given, a `v4.uuid` will be used but a conflict will occur between 
 In a loop, a good practice would be to use the iteration index as the `id` prop
 
 When a label is clicked, the associated radio triggers `onChange` and passes the string "html" or "raw" as argument
+
+The optionnal `highlighter` prop defines the highlighting style of the code through the react-syntax-highlighter package.
+
+`agate` is the default `highlighter` style
 
 ## Example
 

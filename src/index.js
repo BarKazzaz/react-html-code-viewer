@@ -3,6 +3,7 @@ import React from 'react'
 import reactElementToJSXString from 'react-element-to-jsx-string'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { agate } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+
 import { v4 } from 'uuid'
 
 import style from './styles.module.css'
@@ -11,9 +12,11 @@ class HtmlCodeViewer extends React.Component {
   constructor(props) {
     super(props)
 
+    console.log(this.props.style)
     this.onChange = (this.props.onChange) ? this.props.onChange : () => { }
     this.htmlIsActive = (this.props.active === "html") ? style.active : null
     this.rawIsActive = (this.props.active === "raw") ? style.active : null
+    this.style = (this.props.highlighter) ? this.props.highlighter : agate
 
     if (this.htmlIsActive === null && this.rawIsActive === null) {
       this.htmlIsActive = style.active
@@ -38,7 +41,7 @@ class HtmlCodeViewer extends React.Component {
       showLineNumbers
       wrapLongLines
       language='htmlbars'
-      style={agate}
+      style={this.style}
     >
       {this.str}
     </SyntaxHighlighter>
