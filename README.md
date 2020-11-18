@@ -57,9 +57,9 @@ The optionnal `highlighter` prop defines the highlighting style of the code thro
 
 `agate` is the default `highlighter` style
 
-## Example
+[style demo here](https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/)
 
-[here](https://vivienld.github.io/react-html-code-viewer/)
+[Component example here](https://vivienld.github.io/react-html-code-viewer/)
 
 ## License
 
