@@ -26,12 +26,6 @@
   flex-flow: column wrap;
 }
 
-.htmlViewer .delimiter {
-  border-top: 0.1px solid #bababa;
-  height: 0.1rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
 .htmlViewer .content {
   border-radius: 0.5rem;
   padding: 0.5rem;
