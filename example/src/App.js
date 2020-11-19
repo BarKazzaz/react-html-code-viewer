@@ -27,13 +27,13 @@ function getCodeViewer(highlighter) {
         This is an example text
     </div>
       <div>
-        click on <strong>html</strong> to display rendered html
+        click on <strong>the frame</strong> to change the view
     </div>
       <div>
-        click on <strong>code</strong> to display raw code
+        click on <strong>the arrows</strong> to split the view
     </div>
       <div>
-        click on <strong>copy</strong> to save code in the clipboard
+        click on <strong>the copy logo</strong> to save code in the clipboard
     </div>
       <div>
         you can resize me, i am responsive :)
