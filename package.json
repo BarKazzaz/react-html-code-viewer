@@ -1,6 +1,6 @@
 {
   "name": "react-html-code-viewer",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A html code viewer that can switch from raw to rendered code and copy to the clipboard",
   "author": "vivienld",
   "license": "MIT",

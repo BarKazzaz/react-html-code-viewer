@@ -31,7 +31,6 @@
   padding: 0;
   margin: 1rem 0.5rem;
   display: flex;
-  height: 100%;
   flex: 1;
   overflow-y: hidden;
 }
