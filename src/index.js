@@ -5,7 +5,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter'
 import { agate } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy, faWindowMaximize } from '@fortawesome/free-regular-svg-icons'
-import { faColumns, faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
+import { faColumns, faExchangeAlt, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 import { v4 } from 'uuid'
 
@@ -64,6 +64,7 @@ class HtmlCodeViewer extends React.Component {
       copyLabel: this.labels.copy,
       split: this.props.split ? true : false,
       splitIcon: this.props.split ? this.labels.square : this.labels.column,
+      copyIcon: <FontAwesomeIcon icon={faCopy} />
     }
 
     this.html = <div key={1} className={style.content}>{this.html}</div>
@@ -104,11 +105,11 @@ class HtmlCodeViewer extends React.Component {
 
   copyToClipBoard(e) {
 
-    this.setState({ copying: true })
+    this.setState({ copyIcon: <FontAwesomeIcon icon={faCheckCircle} /> })
 
     navigator.clipboard.writeText(this.str).then(() => {
       setTimeout(() => {
-        this.setState({ copying: false })
+        this.setState({ copyIcon: <FontAwesomeIcon icon={faCopy} /> })
       }, 500)
     })
   }
@@ -145,7 +146,7 @@ class HtmlCodeViewer extends React.Component {
             <button
               className={(this.state.copying) ? [style.label, style.copying].join(' ') : style.label}
               onClick={this.copyToClipBoard}>
-              <FontAwesomeIcon icon={faCopy} />
+              {this.state.copyIcon}
             </button>
           </div>
 
