@@ -6,19 +6,38 @@ import * as styles from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 let options = []
 let i = 0
-let lastActive = "html"
 for (let style in styles) {
   options.push(<option key={i} value={style}>{style}</option>)
   i++
 }
 
 function getCodeViewer(highlighter) {
-  return <HtmlCodeViewer id="htmlViewer" key={highlighter} highlighter={styles[highlighter]} active={lastActive} title="I am a title" onChange={(active) => { lastActive = active; }}>
-    <div>
-      This is an example text <br />
-      click on <strong>html</strong> to display rendered html<br />
-      click on <strong>code</strong> to display raw code<br />
-      click on <strong>copy</strong> to save code in the clipboard<br />
+  return <HtmlCodeViewer
+    id="htmlViewer"
+    key={highlighter}
+    highlighter={styles[highlighter]}
+    active="raw"
+    split
+
+    title="This is an example of how it works"
+    onChange={(active) => { }}>
+
+    <div id="htmlExample">
+      <div>
+        This is an example text
+    </div>
+      <div>
+        click on <strong>html</strong> to display rendered html
+    </div>
+      <div>
+        click on <strong>code</strong> to display raw code
+    </div>
+      <div>
+        click on <strong>copy</strong> to save code in the clipboard
+    </div>
+      <div>
+        you can resize me, i am responsive :)
+      </div>
     </div>
   </HtmlCodeViewer>
 }

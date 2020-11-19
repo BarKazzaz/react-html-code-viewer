@@ -4,7 +4,7 @@
   }
   to {
     background-color: #efefef;
-    color: #007bff;
+    color: #000;
   }
 }
 
@@ -13,7 +13,7 @@
     background-color: #efefef;
   }
   to {
-    background-color: #007bff;
+    background-color: #000;
     color: #fff;
   }
 }
@@ -28,15 +28,19 @@
 }
 
 .htmlViewer .content {
-  margin: 0.5rem 0;
+  padding: 0;
+  margin: 1rem 0.5rem;
   display: flex;
   height: 100%;
-  align-items: center;
-  overflow: hidden;
+  flex: 1;
+  overflow-y: hidden;
 }
 
 .htmlViewer .content > * {
-  width: 100%;
+  margin: 0;
+  padding: 1rem;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .htmlViewer .togglerContainer {
@@ -47,6 +51,61 @@
   padding: 0.5rem;
   border-radius: 0.25rem;
   justify-content: flex-end;
+}
+
+.htmlViewer .title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  flex: 1;
+}
+
+.htmlViewer .toggler {
+  border-radius: 0.25rem;
+  display: flex;
+  width: fit-content;
+}
+
+.htmlViewer button {
+  font-size: 1.2rem;
+  outline: none;
+  border: none;
+  background: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  margin: 0.2rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.htmlViewer .label.copying {
+  color: #007bff !important;
+}
+
+.htmlViewer .label:hover {
+  animation-name: whiteToGray;
+  animation-direction: alternate;
+  animation-duration: 0.25s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.htmlViewer input {
+  display: none;
+}
+
+.htmlViewer .none {
+  display: none !important;
+}
+
+.htmlViewer .contentContainer {
+  overflow: hidden;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+select {
+  font-size: 1.1rem;
+  font-style: italic;
 }
 
 @media (max-width: 540px) {
@@ -60,42 +119,9 @@
   }
 }
 
-.htmlViewer .title {
-  font-size: 1.6rem;
-  flex: 1;
-}
-
-.htmlViewer .toggler {
-  border-radius: 0.25rem;
-  display: flex;
-  width: fit-content;
-}
-
-.htmlViewer .label {
-  border-radius: 0.25rem;
-  cursor: pointer;
-  margin: 0.2rem;
-  padding: 0.2rem 0.5rem;
-}
-
-.htmlViewer input[type='radio']:not(:checked) + .label:hover,
-.htmlViewer .copyLabel:hover {
-  animation-name: whiteToGray;
-  animation-direction: alternate;
-  animation-duration: 0.25s;
-  animation-fill-mode: forwards;
-  animation-timing-function: linear;
-}
-
-.htmlViewer input[type='radio']:checked + label {
-  color: #fff;
-  background-color: #007bff;
-}
-
-.htmlViewer input {
-  display: none;
-}
-
-.htmlViewer pre {
-  height: 100%;
+@media (max-width: 720px) {
+  .htmlViewer .contentContainer {
+    display: flex;
+    flex-direction: column;
+  }
 }

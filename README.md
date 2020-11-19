@@ -29,7 +29,7 @@ import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 const App = () => {
   return (
     <div>
-      <HtmlCodeViewer highlighter={darcula} title="Example title" id="unique-id" active="raw" onChange={(active) => { console.log(active) }}>
+      <HtmlCodeViewer highlighter={darcula} title="Example title" id="unique-id" active="raw" split onChange={(active) => { console.log(active) }}>
         <div>This is an example of how react-html-code-viewer works.</div>
       </HtmlCodeViewer>
     </div>
@@ -57,6 +57,8 @@ When a label is clicked, the associated radio triggers `onChange` and passes the
 The optionnal `highlighter` prop defines the highlighting style of the code through the react-syntax-highlighter package.
 
 `agate` is the default `highlighter` style
+
+`split`defines if the component is mounted with the two views splited
 
 [Component example here](https://vivienld.github.io/react-html-code-viewer/)
 

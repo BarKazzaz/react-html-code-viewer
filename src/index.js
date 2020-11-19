@@ -3,6 +3,9 @@ import React from 'react'
 import reactElementToJSXString from 'react-element-to-jsx-string'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { agate } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCopy, faWindowMaximize } from '@fortawesome/free-regular-svg-icons'
+import { faColumns, faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
 
 import { v4 } from 'uuid'
 
@@ -12,29 +15,35 @@ class HtmlCodeViewer extends React.Component {
   constructor(props) {
     super(props)
 
-    this.highlighterId = v4()
-    this.onChange = (this.props.onChange) ? this.props.onChange : () => { }
-    this.htmlIsActive = (this.props.active === "html") ? style.active : null
-    this.rawIsActive = (this.props.active === "raw") ? style.active : null
-    this.style = (this.props.highlighter) ? this.props.highlighter : agate
-
-    if (this.htmlIsActive === null && this.rawIsActive === null) {
-      this.htmlIsActive = style.active
+    this.labels = {
+      html: "html",
+      raw: "raw",
+      copy: "copy",
+      copied: "copied",
+      column: <FontAwesomeIcon icon={faColumns} />,
+      square: <FontAwesomeIcon icon={faWindowMaximize} />,
     }
+
+    if (this.props.labels)
+      for (const label in this.props.labels)
+        this.labels[label] = this.props.labels[label]
+
+
+    this.highlighterId = v4()
+
+    this.onChange = (this.props.onChange) ? this.props.onChange : () => { }
+
+    this.style = (this.props.highlighter) ? this.props.highlighter : agate
 
     this.id = (props.id) ? props.id : v4()
 
-    if (props.title) {
-      this.title = <div className={style.title}>{this.props.title}</div>
-    }
+    this.str = reactElementToJSXString(props.children).replace(/{' '}/g, '')
 
-    this.str = reactElementToJSXString(props.children).replace(/{' '}/g, "")
+    if (!this.props.active) this.props.active = this.labels.html
 
     if (props.language === 'html') {
       this.str = this.str.replace(/className/g, 'class')
     }
-
-    this.rendered = props.children
 
     this.raw = <SyntaxHighlighter
       id={this.highlighterId}
@@ -47,76 +56,104 @@ class HtmlCodeViewer extends React.Component {
       {this.str}
     </SyntaxHighlighter>
 
+    this.html = props.children
+
     this.state = {
-      content: (props.active === "raw") ? this.raw : this.rendered,
-      htmlLabelStyle: style.labelActive,
-      rawLabelStyle: style.label,
-      copyLabelStyle: style.copyLabel,
+      content: null,
+      label: this.props.active,
+      copyLabel: this.labels.copy,
+      split: this.props.split ? true : false,
+      splitIcon: this.props.split ? this.labels.square : this.labels.column,
     }
 
-    this.active = props.active
+    this.html = <div key={1} className={style.content}>{this.html}</div>
+    this.raw = <div key={2} className={style.content}>{this.raw}</div>
+
     this.displayHtml = this.displayHtml.bind(this)
     this.displayRaw = this.displayRaw.bind(this)
-    this.handleChecked = this.handleChecked.bind(this)
+    this.toggle = this.toggle.bind(this)
     this.copyToClipBoard = this.copyToClipBoard.bind(this)
   }
 
-  displayRaw() {
-    this.setState({ content: this.raw })
-    this.active = "raw"
+  toggle() {
+    if (this.state.label === this.labels.raw) {
+      this.displayRaw()
+      this.setState({ label: this.labels.html })
+    }
+
+    else if (this.state.label === this.labels.html) {
+      this.displayHtml()
+      this.setState({ label: this.labels.raw })
+    }
+
   }
 
   displayHtml() {
-    this.setState({ content: this.rendered })
-    this.active = "html"
+    this.onChange(this.state.label)
+    this.setState({ content: this.state.split ? [this.html, this.raw] : this.html })
   }
 
-  handleChecked(e) {
-    this.display(e.currentTarget.value)
+  displayRaw() {
+    this.onChange(this.state.label)
+    this.setState({ content: this.state.split ? [this.raw, this.html] : this.raw })
+  }
+
+  componentDidMount() {
+    this.toggle()
   }
 
   copyToClipBoard(e) {
-    e.persist()
-    const target = e.currentTarget
 
-    target.innerText = "copied"
+    this.setState({ copying: true })
 
     navigator.clipboard.writeText(this.str).then(() => {
       setTimeout(() => {
-        target.innerText = "copy"
+        this.setState({ copying: false })
       }, 500)
     })
   }
 
-
-
   render() {
     return (
       <div className={[style.htmlViewer, style.overflowHidden].join(' ')} id={this.id}>
-        <div className={style.togglerContainer} id={this.id + "-togglerContainer"}>
-          {this.title}
 
-          <div className={style.toggler} id={this.id + "-toggler"}>
-            <input type="radio" name={"contentRadio-" + this.id} id={"htmlRadio-" + this.id} onChange={() => this.onChange('html')} defaultChecked={this.htmlIsActive === style.active} />
+        <div className={style.togglerContainer} id={this.id + '-togglerContainer'}>
 
-            <label htmlFor={"htmlRadio-" + this.id} className={style.label + " " + this.htmlIsActive}
-              onClick={this.displayHtml}
-            >
-              html</label>
-            <input type="radio" name={"contentRadio-" + this.id} id={"rawRadio-" + this.id} onChange={() => this.onChange('raw')} defaultChecked={this.rawIsActive === style.active} />
+          {this.props.title ? <div className={style.title}>{this.props.title}</div> : null}
 
-            <label htmlFor={"rawRadio-" + this.id} className={style.label + " " + this.rawIsActive}
-              onClick={this.displayRaw}
-            >
-              code</label>
+          <div className={style.toggler} id={this.id + '-toggler'}>
 
-            <div className={[style.label, style.copyLabel].join(' ')}
-              onClick={this.copyToClipBoard}
-            >copy</div>
+            <button id='split'
+              onClick={() => {
+                const newSplit = !this.state.split
+                const icon = newSplit ? this.labels.square : this.labels.column;
+
+                this.setState({ split: newSplit, splitIcon: icon }, () => {
+                  (this.state.label === this.labels.html) ? this.displayRaw() : this.displayHtml()
+                })
+              }}
+              className={(this.state.split) ? [style.label, style.active].join(' ') : style.label}>
+              {this.state.splitIcon}
+            </button>
+
+            <button id='toggle'
+              onClick={this.toggle}
+              className={style.label}>
+              <FontAwesomeIcon icon={faExchangeAlt} />
+            </button>
+
+            <button
+              className={(this.state.copying) ? [style.label, style.copying].join(' ') : style.label}
+              onClick={this.copyToClipBoard}>
+              <FontAwesomeIcon icon={faCopy} />
+            </button>
           </div>
+
         </div>
 
-        <div className={style.content} id={this.id + "-content"}>{this.state.content}</div>
+        <div className={style.contentContainer}>
+          {this.state.content}
+        </div>
       </div>
     )
   }
