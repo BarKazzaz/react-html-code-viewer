@@ -132,10 +132,17 @@ class HtmlCodeViewer extends React.Component {
 
   drag(e) {
     const cont = this.container.current;
-
-    const x = e.touchX || e.pageX - cont.offsetLeft;
-    const y = e.touchY || e.pageY - cont.offsetTop;
-
+    let x;
+    let y;
+    if (e.touches) {
+      x = e.touches[0].pageX - cont.offsetLeft;
+      y = e.touches[0].pageY - cont.offsetTop;
+    }
+    else {
+      x = e.pageX - cont.offsetLeft;
+      y = e.pageY - cont.offsetTop;
+    }
+    
     const xPerc = x / cont.clientWidth * 100;
     const yPerc = y / cont.clientHeight * 100;
 
