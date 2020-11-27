@@ -46,7 +46,7 @@
   display:inline-block;
 }
 
-.htmlViewer .togglerContainer {
+.togglerContainer {
   background-color: #fff;
   display: flex;
   flex-flow: row wrap;
@@ -122,7 +122,7 @@
 
 @media (max-width: 540px) {
   .togglerContainer {
-    flex-direction: column;
+    flex-flow: column;
     justify-content: center;
     align-items: center;
   }
