@@ -81,7 +81,12 @@ class HtmlCodeViewer extends React.Component {
       onMouseDown={() => {
         document.addEventListener('mousemove', this.drag)
       }}
+
+      onTouchStart={() => {
+        document.addEventListener('touchmove', this.drag)
+      }}
     >
+
     </div>
 
     this.displayHtml = this.displayHtml.bind(this)
@@ -128,8 +133,8 @@ class HtmlCodeViewer extends React.Component {
   drag(e) {
     const cont = this.container.current;
 
-    const x = e.pageX - cont.offsetLeft;
-    const y = e.pageY - cont.offsetTop;
+    const x = e.touchX || e.pageX - cont.offsetLeft;
+    const y = e.touchY || e.pageY - cont.offsetTop;
 
     const xPerc = x / cont.clientWidth * 100;
     const yPerc = y / cont.clientHeight * 100;
@@ -138,11 +143,11 @@ class HtmlCodeViewer extends React.Component {
 
     if (this.bar.current.offsetWidth < this.bar.current.offsetHeight) {
       cont.style.gridTemplateRows = "1fr";
-      cont.style.gridTemplateColumns = xPerc - .5 + "% 1%" + (100 - xPerc - .5) + "%";
+      cont.style.gridTemplateColumns = xPerc - .75 + "% .5%" + (100 - xPerc - .75) + "%";
 
     } else {
       cont.style.gridTemplateColumns = "1fr";
-      cont.style.gridTemplateRows = yPerc - .5 + "% 1%" + (100 - yPerc - .5) + "%";
+      cont.style.gridTemplateRows = yPerc - .75 + "% .5%" + (100 - yPerc - .75) + "%";
     }
   }
 
@@ -208,7 +213,10 @@ class HtmlCodeViewer extends React.Component {
       <div className={[style.htmlViewer, style.overflowHidden].join(' ')} id={this.id}
         onMouseUp={() => {
           document.removeEventListener('mousemove', this.drag)
-        }} >
+        }}
+        onTouchEnd={() => {
+          document.removeEventListener('touchmove', this.drag)
+        }}>
 
         <div className={style.togglerContainer} id={this.id + '-togglerContainer'}>
 

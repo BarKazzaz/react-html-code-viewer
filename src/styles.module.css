@@ -97,7 +97,7 @@
 
 .contentContainer.grid{
   display:grid;
-    grid-template-columns: 49% 1% 49%;
+    grid-template-columns: 49.75% .5% 49.75%;
   grid-template-rows: 1fr;
   gap:.25rem;
 }
@@ -112,7 +112,6 @@
   height: 100%;
   align-self: center;
   justify-self: center;
-  cursor: col-resize;
   width:5px;
   font-size: x-large;
   display:flex;
@@ -144,7 +143,7 @@
   .contentContainer.grid{
     display:grid;
     grid-template-columns:1fr;
-    grid-template-rows: 49% 2% 49%;
+    grid-template-rows: 49.75% .5% 49.75%;
     grid-template-columns: 1fr;
   }
     .contentContainer.block{
@@ -153,13 +152,12 @@
   
 .dragbar {
   background: #ababab;
-  cursor: col-resize;
+  cursor: row-resize;
   width: 100%;
   align-self: center;
   justify-self: center;
-  cursor: col-resize;
     flex-direction:row;
-    line-height: 1px;
+    height:5px;
   font-size: x-large;
   display:flex;
   align-items: center;
