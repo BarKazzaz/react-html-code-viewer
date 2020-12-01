@@ -5,7 +5,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter'
 import { agate } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy, faWindowMaximize } from '@fortawesome/free-regular-svg-icons'
-import { faColumns, faExchangeAlt, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { faColumns, faExchangeAlt, faCheckCircle, faCompressAlt } from '@fortawesome/free-solid-svg-icons'
 
 import { v4 } from 'uuid'
 
@@ -44,7 +44,7 @@ class HtmlCodeViewer extends React.Component {
 
     this.str = reactElementToJSXString(props.children).replace(/{' '}/g, '')
 
-    let active;
+    let active = this.props.active;
     if (!this.props.active) active = this.labels.html
 
     if (props.language === 'html') {
@@ -53,9 +53,7 @@ class HtmlCodeViewer extends React.Component {
 
     this.raw = <SyntaxHighlighter
       id={this.highlighterId}
-      wrapLines
       showLineNumbers
-      wrapLongLines
       language='htmlbars'
       style={this.style}
     >
@@ -78,15 +76,17 @@ class HtmlCodeViewer extends React.Component {
     this.bar = React.createRef();
 
     this.dragbar = <div ref={this.bar} className={style.dragbar}
+    >
+      <FontAwesomeIcon className={style.resize} icon={faCompressAlt} 
+        onMouseDown={() => {
+          document.addEventListener('mousemove', this.drag)
+        }}
 
-      onMouseDown={() => {
-        document.addEventListener('mousemove', this.drag)
-      }}
-
-      onTouchStart={() => {
-        document.addEventListener('touchmove', this.drag)
-      }}
-    />
+        onTouchStart={() => {
+          document.addEventListener('touchmove', this.drag)
+        }}
+      />
+    </div>
 
     this.displayHtml = this.displayHtml.bind(this)
     this.displayRaw = this.displayRaw.bind(this)
@@ -115,14 +115,14 @@ class HtmlCodeViewer extends React.Component {
         this.container.current.style = {
           "display": "grid",
           "grid-template-columns": "1fr",
-          "grid-template-rows": yPerc - .5 + "% 1%" + (100 - yPerc - .5) + "%"
+          "grid-template-rows": yPerc + "% 2%" + (100 - yPerc) + "%"
         }
       } else {
 
         this.container.current.style = {
           "display": "grid",
           "grid-template-rows": "1fr",
-          "grid-template-columns": xPerc - .5 + "% 1%" + (100 - xPerc - .5) + "%"
+          "grid-template-columns": xPerc + "% 2%" + (100 - xPerc) + "%"
         }
       }
     })
@@ -141,18 +141,18 @@ class HtmlCodeViewer extends React.Component {
       y = e.pageY - cont.offsetTop;
     }
     
-    const xPerc = x / cont.clientWidth * 100;
-    const yPerc = y / cont.clientHeight * 100;
+    const xPerc = x / cont.clientWidth * 100 - 2;
+    const yPerc = y / cont.clientHeight * 100 - 2;
 
     document.selection ? document.selection.empty() : window.getSelection().removeAllRanges()
 
     if (this.bar.current.offsetWidth < this.bar.current.offsetHeight) {
       cont.style.gridTemplateRows = "1fr";
-      cont.style.gridTemplateColumns = xPerc - .75 + "% .5%" + (100 - xPerc - .75) + "%";
+      cont.style.gridTemplateColumns = xPerc + "% 2% auto";
 
     } else {
       cont.style.gridTemplateColumns = "1fr";
-      cont.style.gridTemplateRows = yPerc - .75 + "% .5%" + (100 - yPerc - .75) + "%";
+      cont.style.gridTemplateRows = yPerc + "% 2% auto";
     }
   }
 
@@ -258,7 +258,7 @@ class HtmlCodeViewer extends React.Component {
 
         </div>
 
-        <div ref={this.container} className={style.contentContainer} id={this.id + '-container'}>
+        <div ref={this.container} className={[style.contentContainer].join()} id={this.id + '-container'}>
           {this.state.content}
         </div>
       </div>

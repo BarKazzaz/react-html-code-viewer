@@ -16,7 +16,7 @@ function getCodeViewer(highlighter) {
     id="htmlViewer"
     key={highlighter}
     highlighter={styles[highlighter]}
-    active="raw"
+    active="html"
     split
 
     title="This is an example of how it works"
