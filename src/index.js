@@ -5,7 +5,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter'
 import { agate } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy, faWindowMaximize } from '@fortawesome/free-regular-svg-icons'
-import { faColumns, faExchangeAlt, faCheckCircle, faEllipsisV, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import { faColumns, faExchangeAlt, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 import { v4 } from 'uuid'
 
@@ -85,9 +85,7 @@ class HtmlCodeViewer extends React.Component {
       onTouchStart={() => {
         document.addEventListener('touchmove', this.drag)
       }}
-    >
-
-    </div>
+    />
 
     this.displayHtml = this.displayHtml.bind(this)
     this.displayRaw = this.displayRaw.bind(this)
@@ -96,7 +94,6 @@ class HtmlCodeViewer extends React.Component {
     this.copyToClipBoard = this.copyToClipBoard.bind(this)
     this.container = React.createRef();
 
-    this.handleWindowResize()
   }
 
   handleWindowResize() {
@@ -202,6 +199,7 @@ class HtmlCodeViewer extends React.Component {
 
   componentDidMount() {
     this.toggle()
+    this.handleWindowResize()
   }
 
   copyToClipBoard(e) {
