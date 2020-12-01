@@ -44,7 +44,8 @@ class HtmlCodeViewer extends React.Component {
 
     this.str = reactElementToJSXString(props.children).replace(/{' '}/g, '')
 
-    if (!this.props.active) this.props.active = this.labels.html
+    let active;
+    if (!this.props.active) active = this.labels.html
 
     if (props.language === 'html') {
       this.str = this.str.replace(/className/g, 'class')
@@ -65,7 +66,7 @@ class HtmlCodeViewer extends React.Component {
 
     this.state = {
       content: null,
-      label: this.props.active,
+      label: active,
       copyLabel: this.labels.copy,
       split: this.props.split ? true : false,
       splitIcon: this.props.split ? this.labels.square : this.labels.column,
