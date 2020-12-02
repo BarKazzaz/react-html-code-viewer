@@ -18,7 +18,7 @@
   }
 }
 
-*{
+.htmlViewer *{
   box-sizing: border-box;
 }
 .htmlViewer {
@@ -27,8 +27,8 @@
   border-radius: 0.5rem;
   padding: 1rem;
   overflow:hidden;
-  display:grid;
-  grid-template-rows: 1fr 90fr
+  display:flex;
+  flex-direction: column;
 }
 
 .htmlViewer * {
@@ -36,19 +36,17 @@
 }
 .htmlViewer .content {
   padding: 0;
-  display:inline-block;
-  height:100%;
-  overflow: auto;
+  padding:1rem;
+  overflow-y:auto;
+  height:fit-content;
 }
 
 .htmlViewer .content > * {
   margin: 0;
   padding: 1rem;
-  overflow-y: auto;
-  display:inline-block;
 }
 
-.togglerContainer {
+.htmlViewer .togglerContainer {
   background-color: #fff;
   display: flex;
   flex-flow: row wrap;
@@ -58,18 +56,18 @@
   justify-content: flex-end;
 }
 
-.title {
+.htmlViewer .title {
   font-size: 1.6rem;
   font-weight: 600;
   flex: 1;
 }
 
-.toggler {
+.htmlViewer .toggler {
   border-radius: 0.25rem;
   display: flex;
 }
 
-.label {
+.htmlViewer .label {
   font-size: 1.2rem;
   outline: none;
   border: none;
@@ -80,36 +78,37 @@
   padding: 0.2rem 0.5rem;
 }
 
-.label:hover {
+.htmlViewer .label:hover {
   animation-name: whiteToGray;
   animation-direction: alternate;
   animation-duration: 0.25s;
   animation-fill-mode: forwards;
   animation-timing-function: linear;
 }
-.content{
+
+.htmlViewer .content{
   width:100%;
 }
 
-.contentContainer {
+.htmlViewer  .contentContainer {
   position:relative;
   margin-top: .5rem;
   overflow:hidden;
   display:block;
 }
 
-.contentContainer.grid{
+.htmlViewer .contentContainer.grid{
   display:grid;
   grid-template-columns: 49% 1% auto;
   grid-template-rows: 1fr;
   gap:1%;
 }
 
-.contentContainer.block{
+.htmlViewer .contentContainer.block{
     display:block;
   }
   
-.dragbar {
+.htmlViewer .dragbar {
   background: #ababab;
   height: 100%;
   align-self: center;
@@ -122,7 +121,7 @@
   justify-content: center;
 }
 
-.resize{
+.htmlViewer .resize{
     cursor: col-resize;
     background-color: #000;
     color:#fff;
@@ -131,7 +130,7 @@
 }
 
 @media (max-width: 540px) {
-  .dragbar {
+  .htmlViewer .dragbar {
   background: #ababab;
   align-self: center;
   justify-self: center;
@@ -144,34 +143,31 @@
   justify-content: center;
 }
 
-  .togglerContainer {
+  .htmlViewer .togglerContainer {
     flex-flow: column;
     justify-content: center;
     align-items: center;
   }
 
-  .title {
+  .htmlViewer .title {
     text-align: center;
   }
 }
 
 @media (max-width: 720px) {
-  .htmlViewer .content{
-    display:block;
-  }
   
-  .contentContainer.grid{
+  .htmlViewer .contentContainer.grid{
     display:grid;
     grid-template-columns:1fr;
     grid-template-rows: 49% 2% 49%;
     grid-template-columns: 1fr;
       gap:2%;
   }
-    .contentContainer.block{
+  .htmlViewer   .contentContainer.block{
     display:block;
   }
   
-.dragbar {
+.htmlViewer .dragbar {
   background: #ababab;
   align-self: center;
   justify-self: center;
@@ -189,18 +185,3 @@
 }
 }
 
-::-webkit-scrollbar {
-  width: .8rem;
-}
-
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 1rem 1rem #ababab;
-  border-left: solid 0.2rem transparent;
-  border-right: solid 0.2rem transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 1rem 1rem rgb(89, 90, 95);
-  border-left: solid 0.2rem transparent;
-  border-right: solid 0.2rem transparent;
-}
