@@ -35,10 +35,14 @@
   box-sizing: border-box;
 }
 .htmlViewer .content {
+  height:100%;
   padding: 0;
   padding:1rem;
-  overflow-y:auto;
-  height:fit-content;
+}
+
+.htmlViewer .content pre {
+  height:100%;
+    overflow-y:auto;
 }
 
 .htmlViewer .content > * {
@@ -88,6 +92,7 @@
 
 .htmlViewer .content{
   width:100%;
+  overflow:hidden;
 }
 
 .htmlViewer  .contentContainer {
