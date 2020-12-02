@@ -135,6 +135,10 @@
 }
 
 @media (max-width: 540px) {
+  .htmlViewer .resize{
+    cursor: row-resize;
+}
+
   .htmlViewer .dragbar {
   background: #ababab;
   align-self: center;
@@ -185,7 +189,7 @@
   justify-content: center;
 }
 
-.resize{
+.htmlViewer .resize{
     cursor: row-resize;
 }
 }
